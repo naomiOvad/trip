@@ -1,0 +1,6 @@
+@projectNaomi_HostAddress = http://localhost:5216
+
+GET {{projectNaomi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
