@@ -9,7 +9,7 @@ namespace Project.Core.Repositories
 {
     public interface IGuideRepositories
     {
-        public List<Guide> GetGuides();
+        public IEnumerable<Guide> GetGuides();
         public Guide GetGuide(string id);
         public Guide AddGuide(Guide guide);
 

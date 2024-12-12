@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.Data;
 
@@ -11,9 +12,11 @@ using Project.Data;
 namespace Project.Data.Migrations
 {
     [DbContext(typeof(DataContex))]
-    partial class DataContexModelSnapshot : ModelSnapshot
+    [Migration("20241212102848_one-many")]
+    partial class onemany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace Project.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("RegistersTrip", b =>
-                {
-                    b.Property<string>("registersid")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("tripscode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("registersid", "tripscode");
-
-                    b.HasIndex("tripscode");
-
-                    b.ToTable("RegistersTrip");
-                });
 
             modelBuilder.Entity("projectNaomi.Core.model.Guide", b =>
                 {
@@ -106,21 +94,6 @@ namespace Project.Data.Migrations
                     b.HasIndex("guideId");
 
                     b.ToTable("trips");
-                });
-
-            modelBuilder.Entity("RegistersTrip", b =>
-                {
-                    b.HasOne("projectNaomi.Core.model.Registers", null)
-                        .WithMany()
-                        .HasForeignKey("registersid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("projectNaomi.Core.model.Trip", null)
-                        .WithMany()
-                        .HasForeignKey("tripscode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("projectNaomi.Core.model.Trip", b =>

@@ -18,7 +18,7 @@ namespace Project.Service
            _guideRepository = guideRepository;
         }
 
-        public List<Guide> GetGuides()
+        public IEnumerable<Guide> GetGuides()
         {
             return _guideRepository.GetGuides();
         }

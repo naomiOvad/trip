@@ -9,7 +9,7 @@ namespace Project.Core.Service
 {
     public interface IRegistersService
     {
-        public List<Registers> GetRegister();
+        public IEnumerable<Registers> GetRegister();
         public Registers GetRegister(string id);
         public Registers AddRegisters(Registers registers);
         public void UpdateRegisters(string id, Registers registers);

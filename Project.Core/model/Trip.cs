@@ -10,6 +10,7 @@ namespace projectNaomi.Core.model
         public DateTime date { get; set; }
         public int numRegisters { get; set; }
         public string idGuide { get; set; }
-
+        public Guide guide { get; set; }
+        public List<Registers> registers { get; set; }
     }
 }

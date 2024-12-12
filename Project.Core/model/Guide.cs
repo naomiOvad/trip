@@ -8,5 +8,6 @@ namespace projectNaomi.Core.model
         public string Id { get; set; }
         public string Name { get; set; }
         public bool status { get; set; }
+        public List<Trip> Trips { get; set; }
     }
 }

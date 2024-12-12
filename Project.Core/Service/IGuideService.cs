@@ -9,7 +9,7 @@ namespace Project.Core.Service
 {
     public interface IGuideService
     {
-        public List<Guide> GetGuides();
+        public IEnumerable<Guide> GetGuides();
         public Guide GetGuide(string id);
         public Guide AddGuide(Guide guide);
         public void UpdateGuide(string id, Guide guide);

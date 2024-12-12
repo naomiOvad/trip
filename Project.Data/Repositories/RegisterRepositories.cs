@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using Project.Core.Repositories;
 using projectNaomi.Core.model;
 using System;
@@ -18,22 +19,23 @@ namespace Project.Data.Repoitories
         {
             _context = contex;
         }
-        public List<Registers> GetRegister()
+        public IEnumerable<Registers> GetRegister()
         {
-            return _context.registers.ToList();
+            return _context.registers.Include(r=>r.trips);
         }
         public Registers GetRegister(string id)
         {
 
             var index = _context.registers.ToList().FindIndex(e => e.id.Equals(id));
             //נשלח את התז רק לאחר בדיקה בסרביס שזה לא שווה מינוס אחד
-            return _context.registers.ToList()[index];
+            return _context.registers.Include(r => r.trips).ToList()[index];
 
 
         }
         public Registers AddRegisters(Registers registers)
         {
             _context.registers.Add(registers);
+            _context.SaveChanges();
             return registers;
         }
         public void UpdateRegisters(string id, Registers registers)
@@ -43,11 +45,13 @@ namespace Project.Data.Repoitories
             _context.registers.ToList()[index].age = registers.age;
             _context.registers.ToList()[index].name = registers.name;
             _context.registers.ToList()[index].codeTrip = registers.codeTrip;
+            _context.SaveChanges();
         }
         public void changeRegistersStatus(string id)
         {
             var index = _context.registers.ToList().FindIndex(e => e.id.Equals(id));
             _context.registers.ToList()[index].status = false;
+            _context.SaveChanges();
         }
 
 

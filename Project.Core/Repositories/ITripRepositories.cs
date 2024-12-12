@@ -9,7 +9,7 @@ namespace Project.Core.Repositories
 {
     public interface ITripRepositories
     {
-        public List<Trip> GetTrip();
+        public IEnumerable<Trip> GetTrip();
         public Trip GetTrip(string code);
         public Trip AddTrip(Trip trip);
         public void UpdateTrip(string code, Trip trip);

@@ -18,7 +18,7 @@ namespace Project.Service
             _registerRepositories = register;
         }
 
-        public List<Registers> GetRegister()
+        public IEnumerable<Registers> GetRegister()
         {
            return _registerRepositories.GetRegister();
         }

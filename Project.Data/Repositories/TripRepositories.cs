@@ -1,4 +1,5 @@
-﻿using Project.Core.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.Core.Repositories;
 using projectNaomi.Core.model;
 using System;
 using System.Collections.Generic;
@@ -19,14 +20,14 @@ namespace Project.Data.Repoitories
         {
             _context = contex;
         }
-        public List<Trip> GetTrip()
+        public IEnumerable<Trip> GetTrip()
         {
-            return _context.trips.ToList();
+            return _context.trips.Include(g=>g.guide).Include(r=>r.registers);
         }
         public Trip GetTrip(string code)
         {
 
-            var index = _context.trips.ToList().FindIndex(e => e.code.Equals(code));
+            var index = _context.trips.Include(g => g.guide).Include(r=>r.registers).ToList().FindIndex(e => e.code.Equals(code));
             //נשלח את התז רק לאחר בדיקה בסרביס שזה לא שווה מינוס אחד
             return _context.trips.ToList()[index];
 
@@ -35,6 +36,7 @@ namespace Project.Data.Repoitories
         public Trip AddTrip(Trip trip)
         {
             _context.trips.Add(trip);
+            _context.SaveChanges();
             return trip;
         }
         public void UpdateTrip(string code, Trip trip)
@@ -45,12 +47,14 @@ namespace Project.Data.Repoitories
             _context.trips.ToList()[index].location = trip.location;
             _context.trips.ToList()[index].numRegisters = trip.numRegisters;
             _context.trips.ToList()[index].idGuide = trip.idGuide;
+            _context.SaveChanges();
 
         }
         public void delete(string code)
         {
             var index = _context.trips.ToList().FindIndex(e => e.code.Equals(code));
             _context.trips.ToList().RemoveAt(index);
+            _context.SaveChanges();
         }
 
 

@@ -18,7 +18,7 @@ namespace Project.Service
             _tripRepositories = tripRepositories;      
         }
 
-        public List<Trip> GetTrip()
+        public IEnumerable<Trip> GetTrip()
         {
           return _tripRepositories.GetTrip();
         }

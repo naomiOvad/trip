@@ -9,7 +9,7 @@ namespace Project.Core.Repositories
 {
     public interface IRegisterRepositories
     {
-        public List<Registers> GetRegister();
+        public IEnumerable<Registers> GetRegister();
         public Registers GetRegister(string id);
         public Registers AddRegisters(Registers registers);
         public void UpdateRegisters(string id, Registers registers);
